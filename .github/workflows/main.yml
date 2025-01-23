@@ -64,3 +64,7 @@ jobs:
 
           await main();' > upload.js
           node upload.js
+          
+      - name: Log IPFS URL
+        run: |
+          echo "Your IPFS URL is: https://gateway.pinata.cloud/ipfs/$(cat ipfs_hash.txt)"
