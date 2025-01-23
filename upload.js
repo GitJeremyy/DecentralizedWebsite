@@ -17,4 +17,4 @@ async function main() {
 
 await main();
 
-// https://gateway.pinata.cloud/ipfs/bafkreibm6jg3ux5qumhcn2b3flc3tyu6dmlb4xa7u5bf44yegnrjhc4yeq
+// https://gateway.pinata.cloud/ipfs/bafkreibm6jg3ux5qumhcn2b3flc3tyu6dmlb4xa7u5bf44yegnrjhc4yeq (old website)
