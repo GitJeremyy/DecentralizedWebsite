@@ -1,0 +1,47 @@
+name: Deploy to Pinata
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  upload-to-pinata:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install pinata-web3
+
+      - name: Upload file to Pinata
+        env:
+          PINATA_JWT: ${{ secrets.PINATA_JWT }}
+          PINATA_GATEWAY: ${{ secrets.PINATA_GATEWAY }}
+        run: |
+          echo 'import { PinataSDK } from "pinata-web3";
+
+          const pinata = new PinataSDK({
+            pinataJwt: process.env.PINATA_JWT,
+            pinataGateway: process.env.PINATA_GATEWAY,
+          });
+
+          async function main() {
+            try {
+              const file = new File(["hello"], "Testing.txt", { type: "text/plain" });
+              const upload = await pinata.upload.file(file);
+              console.log(upload);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+
+          await main();' > upload.js
+          node upload.js
