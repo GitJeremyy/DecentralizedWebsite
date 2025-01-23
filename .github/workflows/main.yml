@@ -19,7 +19,26 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        run: npm install pinata-web3
+        run: npm install
+
+      - name: Create or update package.json
+        run: |
+          echo '{
+            "name": "decentralizedwebsite",
+            "version": "1.0.0",
+            "description": "Workshop with Pinata",
+            "main": "index.js",
+            "type": "module",
+            "scripts": {
+              "test": "echo \"Error: no test specified\" && exit 1"
+            },
+            "keywords": [],
+            "author": "",
+            "license": "ISC",
+            "dependencies": {
+              "@pinata/sdk": "^2.1.0"
+            }
+          }' > package.json
 
       - name: Upload file to Pinata
         env:
